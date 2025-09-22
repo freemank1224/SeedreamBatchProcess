@@ -1,0 +1,35 @@
+api:
+  base_url: https://ark.cn-beijing.volces.com/api/v3
+  max_retries: 3
+  model: doubao-seedream-4-0-250828
+  timeout: 30
+batch:
+  auto_retry: true
+  batch_size: 10
+  max_concurrent_tasks: 5
+  retry_delay: 5
+image:
+  default_size: 2K
+  max_size_mb: 10
+  output_format: png
+  supported_formats:
+  - .jpg
+  - .jpeg
+  - .png
+  - .bmp
+  - .tiff
+logging:
+  console_enabled: true
+  file_enabled: true
+  level: INFO
+  max_file_size_mb: 10
+paths:
+  cache_dir: cache
+  input_dir: input
+  logs_dir: logs
+  output_dir: output
+ui:
+  height: 600
+  port: 7860
+  share: false
+  theme: default
