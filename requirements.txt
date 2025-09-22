@@ -1,0 +1,24 @@
+# Seedream 批处理应用 - Python依赖包
+# 基础框架
+gradio>=4.0.0
+
+# API通信
+openai>=1.0.0
+requests>=2.28.0
+
+# 图像处理
+Pillow>=9.0.0
+
+# 文件处理
+PyYAML>=6.0
+python-dotenv>=1.0.0
+
+# 日志和工具
+colorama>=0.4.6
+tqdm>=4.64.0
+
+# 数据处理
+pandas>=1.5.0
+
+# 注意：以下是Python内置模块，无需安装
+# asyncio, pathlib, datetime, uuid, json
