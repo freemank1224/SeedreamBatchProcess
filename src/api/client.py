@@ -363,17 +363,18 @@ class SeedreamAPIClient:
         Returns:
             模型信息
         """
+        # 将布尔值转换为字符串，以避免Gradio 4.x中的JSON Schema兼容性问题
         return {
             "model": self.config.get("api.model"),
             "base_url": self.config.get("api.base_url"),
             "supported_sizes": ["1K", "2K", "4K"],
             "supported_formats": ["url", "b64_json"],
             "features": {
-                "text_to_image": True,
-                "image_to_image": True,
-                "image_editing": True,
-                "sequential_generation": True,
-                "video_generation": False  # 暂未支持
+                "text_to_image": "true",
+                "image_to_image": "true",
+                "image_editing": "true",
+                "sequential_generation": "true",
+                "video_generation": "false"  # 暂未支持
             }
         }
 

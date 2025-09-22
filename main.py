@@ -11,7 +11,7 @@ from pathlib import Path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
-from src.ui.minimal_interface import create_minimal_interface
+from src.ui.main_interface import seedream_ui
 from src.utils.config import config_manager
 from src.api.client import api_client
 from src.batch import task_scheduler
@@ -202,7 +202,7 @@ def main():
     
     try:
         # 创建并启动界面
-        interface = create_minimal_interface()
+        interface = seedream_ui.create_interface()
         
         logger.info(f"启动Web界面...")
         logger.info(f"地址: http://{args.host}:{args.port}")

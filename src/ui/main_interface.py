@@ -97,9 +97,10 @@ class SeedreamUI:
                     test_connection_btn = gr.Button("测试连接", variant="secondary", size="sm")
             
             with gr.Column(scale=1):
-                model_info = gr.JSON(
+                # 使用Markdown组件替代JSON组件以避免兼容性问题
+                model_info_md = gr.Markdown(
                     label="模型信息",
-                    value=api_client.get_model_info()
+                    value="正在加载模型信息..."
                 )
         
         # 配置事件
@@ -182,22 +183,24 @@ class SeedreamUI:
                     height="auto"
                 )
                 
-                result_info = gr.JSON(
+                # 使用Markdown组件替代JSON组件以避免兼容性问题
+                result_info_md = gr.Markdown(
                     label="生成信息",
-                    visible=False
+                    visible=False,
+                    value="暂无生成信息"
                 )
         
         # 事件绑定
         single_generate_btn.click(
             fn=self._generate_single_image,
             inputs=[single_prompt, single_size, single_num_images],
-            outputs=[result_gallery, result_info]
+            outputs=[result_gallery, result_info_md]
         )
         
         batch_generate_btn.click(
             fn=self._generate_batch_images,
             inputs=[batch_prompts, prompt_file, batch_size, batch_output_dir],
-            outputs=[result_info]
+            outputs=[result_info_md]
         )
     
     def _create_image_to_image_tab(self) -> None:
@@ -220,9 +223,11 @@ class SeedreamUI:
                     
                     scan_dir_btn = gr.Button("扫描目录", size="sm")
                     
-                    dir_info = gr.JSON(
+                    # 使用Markdown组件替代JSON组件以避免兼容性问题
+                    dir_info_md = gr.Markdown(
                         label="目录扫描结果",
-                        visible=False
+                        visible=False,
+                        value="暂无扫描结果"
                     )
                 
                 # 编辑参数
@@ -264,16 +269,18 @@ class SeedreamUI:
                     height="auto"
                 )
                 
-                process_info = gr.JSON(
+                # 使用Markdown组件替代JSON组件以避免兼容性问题
+                process_info_md = gr.Markdown(
                     label="处理信息",
-                    visible=False
+                    visible=False,
+                    value="暂无处理信息"
                 )
         
         # 事件绑定
         scan_dir_btn.click(
             fn=self._scan_image_directory,
             inputs=[input_dir],
-            outputs=[dir_info]
+            outputs=[dir_info_md]
         )
         
         process_images_btn.click(
@@ -282,7 +289,7 @@ class SeedreamUI:
                 input_images, input_dir, edit_prompt, 
                 edit_mode, edit_size, edit_output_dir
             ],
-            outputs=[processed_gallery, process_info]
+            outputs=[processed_gallery, process_info_md]
         )
     
     def _create_batch_management_tab(self) -> None:
@@ -306,9 +313,10 @@ class SeedreamUI:
                 # 队列状态
                 with gr.Group():
                     gr.Markdown("### 队列状态")
-                    queue_status = gr.JSON(
+                    # 使用Markdown组件替代JSON组件以避免兼容性问题
+                    queue_status_md = gr.Markdown(
                         label="队列状态",
-                        value=task_queue.get_queue_status()
+                        value="暂无队列信息"
                     )
                     
                     refresh_status_btn = gr.Button("刷新状态", size="sm")
@@ -328,22 +336,22 @@ class SeedreamUI:
         # 事件绑定
         start_btn.click(
             fn=self._start_batch_processing,
-            outputs=[queue_status]
+            outputs=[queue_status_md]
         )
         
         pause_btn.click(
             fn=self._pause_batch_processing,
-            outputs=[queue_status]
+            outputs=[queue_status_md]
         )
         
         stop_btn.click(
             fn=self._stop_batch_processing,
-            outputs=[queue_status]
+            outputs=[queue_status_md]
         )
         
         refresh_status_btn.click(
             fn=self._get_queue_status,
-            outputs=[queue_status]
+            outputs=[queue_status_md]
         )
         
         refresh_tasks_btn.click(
@@ -361,9 +369,10 @@ class SeedreamUI:
                 progress_bar = gr.Progress()
                 
                 with gr.Row():
-                    progress_info = gr.JSON(
+                    # 使用Markdown组件替代JSON组件以避免兼容性问题
+                    progress_info_md = gr.Markdown(
                         label="进度详情",
-                        value=self.current_progress
+                        value=str(self.current_progress)
                     )
                     
                     progress_chart = gr.BarPlot(
